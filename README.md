@@ -32,4 +32,4 @@ node scripts/prepare-run.mjs ABC-123
 - Let scripts handle deterministic checks such as linting, tests, builds, and type checks.
 - Keep a human responsible for product decisions and final approval.
 
-The workflow is intentionally stack-aware but not tied to one framework. It can be adapted to React, TypeScript, JavaScript, Node.js, and similar full-stack projects.
+The workflow is intentionally stack-aware but not tied to one framework, programming language, hosting provider, or repository layout. It discovers the target project's conventions instead of imposing them.

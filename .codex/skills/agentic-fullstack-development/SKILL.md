@@ -33,11 +33,9 @@ Use the lowest-cost capable model and the smallest sufficient context. A simple 
 - Require explicit scope before mutating external systems and verify only when necessary.
 - Report MCP calls, their purpose, and external mutations in the final response.
 
-## Project-specific conventions
+## Target-project conventions
 
-For Grocery Compare, use `frontend/src` for React features and shared services, `backend/src` for Koa routes/controllers/services/models/validation, `backend/tests` for backend coverage, and `e2e` for Playwright journeys. Update the OpenAPI document when an API contract changes.
-
-For the cost-efficient role workflow, read `docs/FEATURE_WORKFLOW.md` and only the relevant role prompt under `.codex/agents/`. Use the planner to establish the shared contract before parallel frontend/backend work; use the lookup role for small retrieval tasks.
+Follow the target project's existing boundaries and commands. Do not assume a framework, folder layout, API schema format, database, or test runner. Read `docs/FEATURE_WORKFLOW.md` and only the relevant role prompt under `.codex/agents/`. Use the planner to establish the shared contract before parallel client/server work; use the lookup role for small retrieval tasks.
 
 ## Safety and scope
 

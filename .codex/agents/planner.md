@@ -7,7 +7,7 @@ Input: ticket plus the smallest relevant file tree and interfaces.
 Keep the handoff short (around 20 lines):
 
 1. Acceptance criteria.
-2. Shared API contract: OpenAPI, Zod schema, or TypeScript boundary.
+2. Shared contract: OpenAPI, JSON Schema, typed interface, event schema, or another boundary used by the target project.
 3. Small task list with exact file paths.
 4. Dependencies, risks, and test targets.
 

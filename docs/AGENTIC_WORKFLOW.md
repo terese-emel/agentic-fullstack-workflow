@@ -1,6 +1,6 @@
 # Agentic Full-Stack Development Workflow
 
-This workflow turns a feature request into a small, reviewable vertical slice. It is designed for Grocery Compare and supports React, JavaScript/TypeScript, Node.js, API, database, and end-to-end work.
+This workflow turns a feature request into a small, reviewable vertical slice. It can be adapted to any frontend, backend, API, database, or end-to-end stack.
 
 ## Operating rules
 
@@ -37,7 +37,7 @@ One sentence describing the user or business outcome.
 
 ## Actors and entry points
 - Who uses it?
-- Which React screen, API route, job, or database flow is involved?
+- Which screen, API route, job, service, or data flow is involved?
 
 ## Acceptance criteria
 - [ ] Observable success behavior
@@ -70,11 +70,11 @@ The plan should be ordered by dependency and describe files, contracts, and veri
 ```md
 ## Implementation plan
 
-1. Contract: define request/response or component-state changes.
-2. Backend: update validation, route/controller/service/model as needed.
-3. Frontend: update API boundary, state, UI, loading, empty, and error states.
-4. Tests: add focused unit/API/component tests and an E2E test when the user flow crosses the stack.
-5. Documentation: update OpenAPI, README, or operational notes if behavior changes.
+1. Contract: define request/response, event, or component-state changes.
+2. Server or service layer: update validation, handlers, business logic, and persistence as needed.
+3. Client layer: update the API boundary, state, UI, loading, empty, and error states as needed.
+4. Tests: add focused unit/API/component tests and an end-to-end test when the user flow crosses the stack.
+5. Documentation: update the API schema, README, or operational notes if behavior changes.
 6. Verification: run targeted tests, lint, build, and relevant CI-equivalent checks.
 
 ## Files expected to change
@@ -85,15 +85,15 @@ The plan should be ordered by dependency and describe files, contracts, and veri
 - Rollback or compatibility strategy:
 ```
 
-For this repository, use the existing boundaries: React feature modules and shared services in `frontend/src`, Koa routes/controllers/services/models in `backend/src`, and Playwright page objects/tests in `e2e`.
+Use the boundaries already established by the target project. Typical boundaries include client features, shared API clients, server handlers, business services, persistence models, and end-to-end tests. Do not assume folder names or frameworks.
 
-## 3. Draft React, TypeScript, or Node.js code
+## 3. Draft application code
 
 Implement in small slices. Each slice should be easy to review and should keep the public contract explicit.
 
 ### Coding checklist
 
-- Reuse the existing API client, error format, validation, and authentication flow.
+- Reuse the existing API client, error format, validation, and authentication flow when present.
 - Keep HTTP concerns in controllers/routes and business rules in services.
 - Keep React rendering separate from data-fetching and mutation logic where the project already does so.
 - Type boundary data explicitly when introducing TypeScript; do not hide unsafe values behind `any`.
@@ -123,11 +123,11 @@ Choose the narrowest test level that proves each acceptance criterion, then add 
 
 | Concern | Preferred test location | Example |
 | --- | --- | --- |
-| Pure business rule | `backend/tests/unit` | cheapest-price or validation rule |
-| HTTP contract and auth | `backend/tests/api` | status, body, headers, authorization |
-| Persistence and ownership | `backend/tests/integration` | Mongo-backed behavior |
-| React behavior | `frontend/src/**/*.test.jsx` or `.tsx` | states, interaction, error rendering |
-| Full user journey | `e2e/tests` | register/login/search/create/update |
+| Pure business rule | Unit-test location | validation or calculation rule |
+| HTTP contract and auth | API-test location | status, body, headers, authorization |
+| Persistence and ownership | Integration-test location | database-backed behavior |
+| Client behavior | Component-test location | states, interaction, error rendering |
+| Full user journey | End-to-end-test location | a complete user task |
 
 ### Test matrix
 
@@ -140,12 +140,12 @@ Choose the narrowest test level that proves each acceptance criterion, then add 
 | Empty or unavailable dependency | ... | component/integration | added |
 ```
 
-Run targeted checks first, then the relevant project gates:
+Run the target project's checks first, then its relevant quality gates. For example:
 
 ```bash
-cd backend && npm test && npm run lint
-cd ../frontend && npm run test:run && npm run lint && npm run build
-cd ../e2e && npm test
+<server-test-command> && <server-lint-command>
+<client-test-command> && <client-lint-command> && <client-build-command>
+<e2e-test-command>
 ```
 
 Only report a check as passing when its command completed successfully. If an environment dependency prevents a check, report it separately from product failures.
