@@ -9,3 +9,7 @@ The workflow itself is assistant-neutral. `AGENTS.md` is the canonical instructi
 | Codex | `AGENTS.md` | Codex reads the canonical project instructions. |
 
 If an assistant supports only one instruction file, point it at `AGENTS.md`. Do not duplicate the full workflow across adapters; duplication causes the assistants to drift apart.
+
+## Jira integration
+
+For a simple ticket lookup, use `.codex/skills/jira-lookup/SKILL.md` and `.codex/agents/jira-lookup.md`. Configure the assistant's Jira MCP connector separately; the workflow does not hardcode credentials or a Jira host. If no connector is available, provide the ticket text directly.

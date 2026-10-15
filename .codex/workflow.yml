@@ -3,6 +3,7 @@ version: 1
 # Replace these IDs with the models available in your environment.
 models:
   lookup: gpt-5.6-luna
+  jira_lookup: gpt-5.6-luna
   test_writer: gpt-5.6-luna
   planner: gpt-6.1-sol
   frontend_implementer: gpt-6.1-sol
@@ -11,6 +12,10 @@ models:
   architecture_escalation: gpt-6-astra
 
 roles:
+  jira_lookup:
+    prompt: .codex/agents/jira-lookup.md
+    output: .codex/runs/{ticket}/jira-result.md
+    depends_on: []
   planner:
     prompt: .codex/agents/planner.md
     output: .codex/runs/{ticket}/plan.md

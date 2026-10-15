@@ -17,6 +17,8 @@ const required = [
   ".codex/agents/test-writer.md",
   ".codex/agents/reviewer.md",
   ".codex/agents/lookup.md",
+  ".codex/agents/jira-lookup.md",
+  ".codex/skills/jira-lookup/SKILL.md",
   "docs/AGENTIC_WORKFLOW.md",
   "docs/FEATURE_WORKFLOW.md",
 ];
@@ -31,7 +33,7 @@ for (const file of required) {
 }
 
 const config = readFileSync(join(root, ".codex/workflow.yml"), "utf8");
-for (const role of ["lookup", "planner", "frontend_implementer", "backend_implementer", "test_writer", "reviewer"]) {
+for (const role of ["lookup", "jira_lookup", "planner", "frontend_implementer", "backend_implementer", "test_writer", "reviewer"]) {
   if (!new RegExp(`^\\s+${role}:`, "m").test(config)) errors.push(`Missing role: ${role}`);
 }
 

@@ -9,6 +9,7 @@ A practical, cost-aware workflow for using AI agents across full-stack developme
 - Role prompts for planning, frontend/backend implementation, testing, lookup tasks, and review in [`.codex/agents/`](.codex/agents/)
 - Machine-readable model routing and role dependencies in [`.codex/workflow.yml`](.codex/workflow.yml)
 - A shared contract template in [`.codex/templates/contract.md`](.codex/templates/contract.md)
+- A low-cost, read-only Jira lookup skill in [`.codex/skills/jira-lookup/`](.codex/skills/jira-lookup/)
 - The complete workflow in [`docs/AGENTIC_WORKFLOW.md`](docs/AGENTIC_WORKFLOW.md)
 - The lightweight contract-first feature process in [`docs/FEATURE_WORKFLOW.md`](docs/FEATURE_WORKFLOW.md)
 - A pull-request checklist in [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md)
