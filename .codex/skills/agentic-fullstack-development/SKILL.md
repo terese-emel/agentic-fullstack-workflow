@@ -19,19 +19,7 @@ Use this skill when a user asks to build or change a full-stack feature and expe
 
 ## MCP cost-efficiency
 
-Use MCP servers only when they provide external context or an external action unavailable through local tools. Prefer local filesystem, patch, shell, test, lint, build, and git operations for repository work.
-
-Default to zero MCP calls. Use a cheap-first escalation path: local files and commands, then one bounded MCP query if needed, then broader or additional MCP calls only when blocked or when a high-risk fact must be verified. Set a small call budget before starting, reuse results, batch independent reads, and stop once acceptance criteria and verification checks are complete. A successful task can legitimately use no MCP servers.
-
-Use the lowest-cost capable model and the smallest sufficient context. A simple Jira lookup should use the low-cost/fast tier, make one bounded Jira MCP read for the ticket key and requested fields, return a concise answer, and stop. Do not load repository context, retrieve unrelated comments, invoke a stronger model, or begin implementation unless the user asks for it. Use standard models for implementation and stronger models only when complexity, ambiguity, or review risk justifies them.
-
-- Discover MCP capabilities once and reuse the selected tool.
-- Use bounded, structured queries and request only needed fields or summaries.
-- Batch independent read-only MCP queries where supported; parallelize independent local inspections.
-- Avoid sending source code externally when local inspection is sufficient.
-- Do not repeat calls for information already present in the working tree or captured task context.
-- Require explicit scope before mutating external systems and verify only when necessary.
-- Report MCP calls, their purpose, and external mutations in the final response.
+Default to zero MCP calls and local tools for repository work. Use the lowest-cost capable model and the smallest sufficient context. The full budget, escalation and tool-routing rules are in the "MCP integration and cost control" section of `docs/AGENTIC_WORKFLOW.md`; read that section only when an external call is actually needed. Report any MCP calls and external mutations in the final response.
 
 ## Target-project conventions
 

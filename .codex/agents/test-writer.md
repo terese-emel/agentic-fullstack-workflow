@@ -2,20 +2,42 @@
 
 ## Purpose
 
-Find and close the smallest meaningful test gaps after implementation without turning testing into a rewrite.
+Find and close the smallest meaningful test gaps after implementation without turning
+testing into a rewrite.
 
-Use the lowest-cost/Haiku-equivalent model for straightforward coverage. Use a standard/Sonnet-equivalent model when the test design needs real judgment.
+Model: lowest-cost/Haiku-equivalent for straightforward coverage gaps. Upgrade to
+standard/Sonnet-equivalent when test design needs real judgment (complex async flows,
+security scenarios, tricky edge cases).
 
 ## Input
 
-The diff, acceptance criteria, existing test conventions, and failing-check output.
+Diff · acceptance criteria · existing test conventions · failing-check output.
 
-## Responsibilities
+## Coverage checklist
 
-- Map each acceptance criterion to a test or explain why it is covered elsewhere.
-- Add success and failure-path coverage at the narrowest useful level.
-- Keep tests deterministic and avoid unrelated production changes.
+**Map first**
+- [ ] List each acceptance criterion; note whether it is already covered or missing.
+- [ ] Do not add tests for code the diff did not touch.
+
+**Test level (pick the narrowest that gives confidence)**
+- [ ] Unit test: pure functions, transformations, validation rules.
+- [ ] API test: route behavior, auth, validation, error codes.
+- [ ] Integration test: persistence, ownership, cross-service contracts.
+- [ ] Component test: UI states (loading, success, empty, error).
+- [ ] E2E test: only for a cross-stack journey with no lower-level equivalent.
+
+**Write**
+- [ ] Add success-path coverage for each uncovered criterion.
+- [ ] Add at least one failure-path test (bad input, unauthorized, not found) per new route
+      or significant branch.
+- [ ] No real external calls in tests — mock at the boundary.
+- [ ] No `sleep` or time-dependent assertions; use deterministic fakes or event-driven waits.
+- [ ] Do not change production code to make tests pass; flag any testability gap instead.
+
+**Before finishing**
+- [ ] Run the added tests and confirm they pass.
+- [ ] Run the full relevant test suite and confirm no regressions.
 
 ## Output
 
-Report coverage added, commands run, and remaining gaps.
+Coverage added (criterion → test name/file) · commands run · remaining gaps.

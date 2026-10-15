@@ -1,23 +1,40 @@
 version: 1
 
-# Replace these IDs with the models available in your environment.
+# Model IDs per assistant. Replace them with the models available in your environment.
 models:
-  lookup: gpt-5.6-luna
-  jira_lookup: gpt-5.6-luna
-  test_writer: gpt-5.6-luna
-  planner: gpt-6.1-sol
-  frontend_implementer: gpt-6.1-sol
-  backend_implementer: gpt-6.1-sol
-  reviewer: gpt-6.1-sol
-  architecture_escalation: gpt-6-astra
+  codex:
+    lookup: gpt-5.6-luna
+    jira_lookup: gpt-5.6-luna
+    test_writer: gpt-5.6-luna
+    planner: gpt-6.1-sol
+    frontend_implementer: gpt-6.1-sol
+    backend_implementer: gpt-6.1-sol
+    reviewer: gpt-6.1-sol
+    architecture_escalation: gpt-6-astra
+  claude:
+    lookup: haiku
+    jira_lookup: haiku
+    test_writer: haiku
+    planner: sonnet
+    frontend_implementer: sonnet
+    backend_implementer: sonnet
+    reviewer: sonnet
+    architecture_escalation: opus
 
+# optional: true means the planner may skip the role when the contract's work split
+# has no files for it; dependents then wait only on the roles that run.
 roles:
+  lookup:
+    prompt: .codex/agents/lookup.md
+    output: .codex/runs/{ticket}/lookup-result.md
+    depends_on: []
   jira_lookup:
     prompt: .codex/agents/jira-lookup.md
     output: .codex/runs/{ticket}/jira-result.md
     depends_on: []
   planner:
     prompt: .codex/agents/planner.md
+    input: [ticket, contract]
     output: .codex/runs/{ticket}/plan.md
     depends_on: []
   frontend_implementer:
@@ -25,11 +42,13 @@ roles:
     input: [plan, contract]
     output: .codex/runs/{ticket}/frontend-result.md
     depends_on: [planner]
+    optional: true
   backend_implementer:
     prompt: .codex/agents/backend-implementer.md
     input: [plan, contract]
     output: .codex/runs/{ticket}/backend-result.md
     depends_on: [planner]
+    optional: true
   test_writer:
     prompt: .codex/agents/test-writer.md
     input: [plan, contract, diff, check-failures]
@@ -37,9 +56,12 @@ roles:
     depends_on: [frontend_implementer, backend_implementer]
   reviewer:
     prompt: .codex/agents/reviewer.md
-    input: [acceptance-criteria, diff, changed-tests]
+    input: [acceptance-criteria, contract, diff, changed-tests]
     output: .codex/runs/{ticket}/review.md
     depends_on: [test_writer]
+
+# Roles that prepare-run.mjs puts in a feature run manifest, in order.
+feature_run: [planner, frontend_implementer, backend_implementer, test_writer, reviewer]
 
 limits:
   max_mcp_calls_default: 1

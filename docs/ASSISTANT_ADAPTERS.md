@@ -4,7 +4,7 @@ The workflow itself is assistant-neutral. `AGENTS.md` is the canonical instructi
 
 | Assistant | Entry point | How to use it |
 | --- | --- | --- |
-| Claude Code | `CLAUDE.md` | Keep this file as a short pointer to `AGENTS.md`. |
+| Claude Code | `CLAUDE.md`, `.claude/agents/` | `CLAUDE.md` imports `AGENTS.md` with an `@AGENTS.md` line (plain markdown links are not loaded). Each role has a thin agent file in `.claude/agents/` with a `model` matching `models.claude` in `workflow.yml`; it points to the canonical prompt in `.codex/agents/`. |
 | GitHub Copilot | `.github/copilot-instructions.md` | Copilot reads the adapter and follows the shared workflow. |
 | Codex | `AGENTS.md` | Codex reads the canonical project instructions. |
 

@@ -1,3 +1,5 @@
 # Claude Code adapter
 
-Use the canonical instructions in [`AGENTS.md`](AGENTS.md). The workflow is assistant-neutral; read only the relevant role prompt in `.codex/agents/` and the feature process in `docs/FEATURE_WORKFLOW.md`.
+@AGENTS.md
+
+Role agents live in `.claude/agents/` and point to the canonical prompts in `.codex/agents/`. Read only the relevant role prompt and the feature process in `docs/FEATURE_WORKFLOW.md`.
