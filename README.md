@@ -18,6 +18,12 @@ Validate the setup locally with:
 node scripts/validate-workflow.mjs
 ```
 
+Prepare a feature run without loading an agent or calling an MCP server:
+
+```bash
+node scripts/prepare-run.mjs ABC-123
+```
+
 ## Design goals
 
 - Keep context small and focused.

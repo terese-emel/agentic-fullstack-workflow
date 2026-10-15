@@ -14,6 +14,8 @@ Use this as a lightweight rhythm for each feature:
 
 `.codex/workflow.yml` is the source of truth for role dependencies, model routing, inputs, outputs, and call limits. A runner can use it to dispatch roles; `scripts/validate-workflow.mjs` checks that the required prompts and contract template are present.
 
+Start a run with `node scripts/prepare-run.mjs <ticket-id>`. This creates a small run directory with a contract template and manifest before any model or MCP call is made.
+
 The planner writes `.codex/templates/contract.md` into the feature run directory. Frontend and backend agents work from that contract. They may ask for a focused contract, schema, security, or CI file during review, but should not reopen the whole repository.
 
 When parallel work is available, use isolated branches or worktrees:
