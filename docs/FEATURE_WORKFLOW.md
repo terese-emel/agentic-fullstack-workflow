@@ -10,6 +10,35 @@ Use this as a lightweight rhythm for each feature:
 6. Give the reviewer a fresh context with the acceptance criteria and diff.
 7. Keep the final approval with a human.
 
+## Execution configuration
+
+`.codex/workflow.yml` is the source of truth for role dependencies, model routing, inputs, outputs, and call limits. A runner can use it to dispatch roles; `scripts/validate-workflow.mjs` checks that the required prompts and contract template are present.
+
+The planner writes `.codex/templates/contract.md` into the feature run directory. Frontend and backend agents work from that contract. They may ask for a focused contract, schema, security, or CI file during review, but should not reopen the whole repository.
+
+When parallel work is available, use isolated branches or worktrees:
+
+```text
+feature/<ticket>              # integration branch
+feature/<ticket>-frontend     # frontend agent
+feature/<ticket>-backend      # backend agent
+```
+
+Merge the two implementation branches only after the contract is stable. Resolve conflicts on the integration branch, then run the full relevant checks once.
+
+The reviewer normally receives the acceptance criteria, contract, diff, and changed tests. Add security middleware, schema, deployment, or CI files only when the diff touches that risk area.
+
+Record actual usage in `.codex/runs/<ticket>/cost.json` when the host exposes it:
+
+```json
+{
+  "models": {"planner": "gpt-6.1-sol", "lookup": "gpt-5.6-luna"},
+  "mcpCalls": 0,
+  "inputTokens": null,
+  "outputTokens": null
+}
+```
+
 ## Cost controls
 
 - Keep `CLAUDE.md` and prompts short; bring in detailed guidance only when it is relevant.

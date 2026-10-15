@@ -1,26 +1,20 @@
-# Grocery Compare agent context
+# Agentic full-stack workflow context
 
-## Stack
+## Purpose
 
-- Frontend: React + Vite in `frontend/`
-- Backend: Node.js + Koa in `backend/`
-- Persistence: MongoDB + Mongoose
-- E2E: Playwright in `e2e/`
-- API contract: `backend/docs/openapi.yaml`
+This repository contains a reusable, cost-aware workflow for full-stack engineering agents. It is configuration and guidance, not an application stack.
 
 ## Commands
 
-- Backend: `cd backend && npm test`, `npm run lint`
-- Frontend: `cd frontend && npm run test:run`, `npm run lint`, `npm run build`
-- E2E: `cd e2e && npm test`
+- Validate the workflow: `node scripts/validate-workflow.mjs`
 
 ## A few habits to keep us aligned
 
 - Start with the files named in the task and follow direct dependencies only when needed.
-- Keep routes/controllers, services, models, validation, and React features separated.
-- Update the API contract when an endpoint changes.
+- Let the planner create `.codex/templates/contract.md` before frontend and backend work begins.
+- Pass exact paths, contracts, diffs, and failures between roles rather than the whole repository.
 - Add success and failure-path tests for changed behavior.
 - Never expose secrets or commit environment files.
 - Prefer local scripts and small MCP calls. Use the cheapest model that can do the job well.
 
-Detailed workflow guidance is in `docs/AGENTIC_WORKFLOW.md` and role prompts are in `.codex/agents/`.
+Detailed guidance is in `docs/AGENTIC_WORKFLOW.md`, the execution sequence is in `docs/FEATURE_WORKFLOW.md`, and routing lives in `.codex/workflow.yml`.

@@ -1,0 +1,43 @@
+version: 1
+
+# Replace these IDs with the models available in your environment.
+models:
+  lookup: gpt-5.6-luna
+  test_writer: gpt-5.6-luna
+  planner: gpt-6.1-sol
+  frontend_implementer: gpt-6.1-sol
+  backend_implementer: gpt-6.1-sol
+  reviewer: gpt-6.1-sol
+  architecture_escalation: gpt-6-astra
+
+roles:
+  planner:
+    prompt: .codex/agents/planner.md
+    output: .codex/runs/{ticket}/plan.md
+    depends_on: []
+  frontend_implementer:
+    prompt: .codex/agents/frontend-implementer.md
+    input: [plan, contract]
+    output: .codex/runs/{ticket}/frontend-result.md
+    depends_on: [planner]
+  backend_implementer:
+    prompt: .codex/agents/backend-implementer.md
+    input: [plan, contract]
+    output: .codex/runs/{ticket}/backend-result.md
+    depends_on: [planner]
+  test_writer:
+    prompt: .codex/agents/test-writer.md
+    input: [plan, contract, diff, check-failures]
+    output: .codex/runs/{ticket}/test-result.md
+    depends_on: [frontend_implementer, backend_implementer]
+  reviewer:
+    prompt: .codex/agents/reviewer.md
+    input: [acceptance-criteria, diff, changed-tests]
+    output: .codex/runs/{ticket}/review.md
+    depends_on: [test_writer]
+
+limits:
+  max_mcp_calls_default: 1
+  max_output_lines_lookup: 10
+  max_output_lines_planner: 20
+  max_output_lines_other_roles: 10

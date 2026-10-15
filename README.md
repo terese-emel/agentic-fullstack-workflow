@@ -6,9 +6,17 @@ A practical, cost-aware workflow for using AI agents across full-stack developme
 
 - A short always-loaded project context in [`CLAUDE.md`](CLAUDE.md)
 - Role prompts for planning, frontend/backend implementation, testing, lookup tasks, and review in [`.codex/agents/`](.codex/agents/)
+- Machine-readable model routing and role dependencies in [`.codex/workflow.yml`](.codex/workflow.yml)
+- A shared contract template in [`.codex/templates/contract.md`](.codex/templates/contract.md)
 - The complete workflow in [`docs/AGENTIC_WORKFLOW.md`](docs/AGENTIC_WORKFLOW.md)
 - The lightweight contract-first feature process in [`docs/FEATURE_WORKFLOW.md`](docs/FEATURE_WORKFLOW.md)
 - A pull-request checklist in [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md)
+
+Validate the setup locally with:
+
+```bash
+node scripts/validate-workflow.mjs
+```
 
 ## Design goals
 
