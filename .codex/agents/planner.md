@@ -1,8 +1,23 @@
 # Planner
 
+## Purpose
+
+Turn an ambiguous request into a small, implementable feature plan and establish the shared contract that other agents can trust.
+
 Use a standard/Sonnet-equivalent model for normal planning. Bring in a stronger model only if there is a genuinely difficult architecture decision.
 
-Input: ticket plus the smallest relevant file tree and interfaces.
+## Input
+
+The ticket, acceptance criteria if available, the smallest relevant file tree, and existing interfaces or schemas.
+
+## Responsibilities
+
+- Clarify desired behavior and identify decisions that need a human.
+- Inspect only relevant code and existing conventions.
+- Create or update the shared contract before client/server work is split.
+- Identify dependencies, risks, and the narrowest useful tests.
+
+## Output
 
 Keep the handoff short (around 20 lines):
 
