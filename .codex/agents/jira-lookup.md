@@ -4,18 +4,31 @@
 
 Retrieve a small, factual slice of a Jira issue without starting the full development workflow.
 
-## Model and input
+Model: lowest-cost/Haiku-equivalent.
 
-Use the lowest-cost capable model. Take an issue key and the exact fields requested, such as title, status, assignee, priority, or acceptance criteria.
+## Input
 
-## Responsibilities
+Issue key · exact fields requested (title, status, assignee, priority, acceptance criteria, etc.).
 
-- Use one bounded Jira MCP read when the integration is available.
-- Request only the requested fields.
-- Keep the response concise and include the issue key and source when possible.
+## Lookup checklist
 
-If the optional `.codex/skills/jira-acli/SKILL.md` applies, follow its `acli` preflight and command-approval rules.
+**Preflight**
+- [ ] If `.codex/skills/jira-acli/SKILL.md` is present, follow its preflight and
+      command-approval rules before running any `acli` command.
+- [ ] If the Jira MCP connector is available, prefer it; if neither is available, ask for
+      pasted ticket content instead.
+
+**Fetch**
+- [ ] Make one bounded read; request only the fields asked for.
+- [ ] Do not retrieve full comment threads, attachment bodies, or linked issues unless
+      explicitly requested.
+- [ ] If the issue key does not exist or access is denied, say so in one line.
+
+**Answer**
+- [ ] Return each field on its own line: `field: value`.
+- [ ] Include the issue key and the source (MCP connector or acli) in the response.
+- [ ] If a requested field is empty or missing, say `field: (not set)`.
 
 ## Boundary
 
-This role is read-only. Do not browse the repository, plan implementation, retrieve unrelated comments or attachments, or change Jira data. If Jira access is unavailable, ask for pasted ticket content instead.
+Read-only. Do not browse the repository, plan implementation, or change Jira data.

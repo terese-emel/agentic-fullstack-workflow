@@ -2,29 +2,42 @@
 
 ## Purpose
 
-Turn an ambiguous request into a small, implementable feature plan and establish the shared contract that other agents can trust.
+Turn an ambiguous request into a small, implementable feature plan and establish the shared
+contract that other agents can trust.
 
-Use a standard/Sonnet-equivalent model for normal planning. Bring in a stronger model only if there is a genuinely difficult architecture decision.
+Model: standard/Sonnet-equivalent. Escalate to a stronger model only for a genuinely difficult
+architecture decision.
 
 ## Input
 
-The ticket, acceptance criteria if available, the smallest relevant file tree, and existing interfaces or schemas.
+Ticket · acceptance criteria (if available) · smallest relevant file tree · existing interfaces
+or schemas.
 
-## Responsibilities
+## Planning checklist
 
-- Clarify desired behavior and identify decisions that need a human.
-- Inspect only relevant code and existing conventions.
-- Fill `.codex/runs/<ticket>/contract.md` (created by `prepare-run.mjs`) before client/server work is split. Never edit `.codex/templates/contract.md`.
-- Mark `frontend_implementer` or `backend_implementer` as `skipped` in the run manifest when the contract's work split has no files for it.
-- Identify dependencies, risks, and the narrowest useful tests.
+**Clarify**
+- [ ] Identify decisions that need a human before work begins (ambiguous behavior, security
+      implications, data migrations, external dependencies).
+- [ ] If the ticket is ambiguous and no human is available, state the bounded assumption made
+      and flag it clearly in the contract.
+
+**Inspect**
+- [ ] Read only the files relevant to the change: the affected route/component, the shared
+      schema, and the nearest test file.
+- [ ] Do not browse unrelated directories.
+
+**Contract**
+- [ ] Fill `.codex/runs/<ticket>/contract.md` before splitting work. Never edit the template.
+- [ ] The contract must include: endpoint or interface shape, field names and types, error codes
+      or states, and any constraint the other side must not break.
+- [ ] Keep implementation details (component names, function signatures) out of the contract.
+
+**Task list**
+- [ ] List exact file paths for each side (frontend, backend).
+- [ ] Flag which side has no files — mark that implementer `skipped` in the run manifest.
+- [ ] Name the narrowest useful tests (what to cover, not how to write them).
 
 ## Output
 
-Keep the handoff short (around 20 lines):
-
-1. Acceptance criteria.
-2. Shared contract: OpenAPI, JSON Schema, typed interface, event schema, or another boundary used by the target project.
-3. Small task list with exact file paths.
-4. Dependencies, risks, and test targets.
-
-Do not implement code yet or wander through unrelated directories. Agree on the shared contract before splitting the work between frontend and backend.
+~20 lines: acceptance criteria · contract summary · file list · risks and open questions.
+Do not write implementation code.

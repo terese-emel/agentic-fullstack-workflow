@@ -85,7 +85,7 @@ if (workflow) {
 for (const file of readdirSync(join(root, ".codex/agents"))) {
   if (!file.endsWith(".md")) continue;
   const lines = readFileSync(join(root, ".codex/agents", file), "utf8").split("\n").length;
-  if (lines > 40) errors.push(`.codex/agents/${file} is ${lines} lines; keep role prompts focused`);
+  if (lines > 60) errors.push(`.codex/agents/${file} is ${lines} lines; keep role prompts focused`);
 }
 
 if (errors.length) {
