@@ -10,6 +10,8 @@ The workflow itself is assistant-neutral. `AGENTS.md` is the canonical instructi
 
 If an assistant supports only one instruction file, point it at `AGENTS.md`. Do not duplicate the full workflow across adapters; duplication causes the assistants to drift apart.
 
+Portable skills live under `.agents/skills/`, following the Agent Skills convention. The `.codex/skills/` directory remains as a Codex-specific compatibility location.
+
 ## Jira integration
 
 For a simple ticket lookup, use `.codex/skills/jira-lookup/SKILL.md` and `.codex/agents/jira-lookup.md`. When terminal access to Jira Cloud is preferred, use `.codex/skills/jira-acli/SKILL.md`. Configure the Jira MCP connector or `acli` separately; the workflow does not hardcode credentials or a Jira host. If no connector is available, provide the ticket text directly.

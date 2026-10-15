@@ -8,6 +8,7 @@ const required = [
   "CLAUDE.md",
   "AGENTS.md",
   ".github/copilot-instructions.md",
+  ".agents/skills/skill-creator/SKILL.md",
   "docs/ASSISTANT_ADAPTERS.md",
   ".codex/workflow.yml",
   ".codex/templates/contract.md",
