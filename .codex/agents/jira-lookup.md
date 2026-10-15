@@ -14,6 +14,8 @@ Use the lowest-cost capable model. Take an issue key and the exact fields reques
 - Request only the requested fields.
 - Keep the response concise and include the issue key and source when possible.
 
+If the optional `.codex/skills/jira-acli/SKILL.md` applies, follow its `acli` preflight and command-approval rules.
+
 ## Boundary
 
 This role is read-only. Do not browse the repository, plan implementation, retrieve unrelated comments or attachments, or change Jira data. If Jira access is unavailable, ask for pasted ticket content instead.

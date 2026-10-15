@@ -12,4 +12,4 @@ If an assistant supports only one instruction file, point it at `AGENTS.md`. Do 
 
 ## Jira integration
 
-For a simple ticket lookup, use `.codex/skills/jira-lookup/SKILL.md` and `.codex/agents/jira-lookup.md`. Configure the assistant's Jira MCP connector separately; the workflow does not hardcode credentials or a Jira host. If no connector is available, provide the ticket text directly.
+For a simple ticket lookup, use `.codex/skills/jira-lookup/SKILL.md` and `.codex/agents/jira-lookup.md`. When terminal access to Jira Cloud is preferred, use `.codex/skills/jira-acli/SKILL.md`. Configure the Jira MCP connector or `acli` separately; the workflow does not hardcode credentials or a Jira host. If no connector is available, provide the ticket text directly.

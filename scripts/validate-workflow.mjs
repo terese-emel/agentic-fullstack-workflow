@@ -19,6 +19,7 @@ const required = [
   ".codex/agents/lookup.md",
   ".codex/agents/jira-lookup.md",
   ".codex/skills/jira-lookup/SKILL.md",
+  ".codex/skills/jira-acli/SKILL.md",
   "docs/AGENTIC_WORKFLOW.md",
   "docs/FEATURE_WORKFLOW.md",
 ];
