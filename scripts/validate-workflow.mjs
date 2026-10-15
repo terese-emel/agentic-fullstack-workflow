@@ -6,6 +6,9 @@ import { join, relative } from "node:path";
 const root = new URL("..", import.meta.url).pathname;
 const required = [
   "CLAUDE.md",
+  "AGENTS.md",
+  ".github/copilot-instructions.md",
+  "docs/ASSISTANT_ADAPTERS.md",
   ".codex/workflow.yml",
   ".codex/templates/contract.md",
   ".codex/agents/planner.md",

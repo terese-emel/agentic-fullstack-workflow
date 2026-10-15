@@ -4,7 +4,8 @@ A practical, cost-aware workflow for using AI agents across full-stack developme
 
 ## What is included
 
-- A short always-loaded project context in [`CLAUDE.md`](CLAUDE.md)
+- A canonical assistant-neutral context in [`AGENTS.md`](AGENTS.md)
+- Thin adapters for [Claude Code](CLAUDE.md) and [GitHub Copilot](.github/copilot-instructions.md)
 - Role prompts for planning, frontend/backend implementation, testing, lookup tasks, and review in [`.codex/agents/`](.codex/agents/)
 - Machine-readable model routing and role dependencies in [`.codex/workflow.yml`](.codex/workflow.yml)
 - A shared contract template in [`.codex/templates/contract.md`](.codex/templates/contract.md)
@@ -32,4 +33,4 @@ node scripts/prepare-run.mjs ABC-123
 - Let scripts handle deterministic checks such as linting, tests, builds, and type checks.
 - Keep a human responsible for product decisions and final approval.
 
-The workflow is intentionally stack-aware but not tied to one framework, programming language, hosting provider, or repository layout. It discovers the target project's conventions instead of imposing them.
+The workflow is intentionally stack-aware but not tied to one framework, programming language, hosting provider, assistant, or repository layout. It discovers the target project's conventions instead of imposing them. See [`docs/ASSISTANT_ADAPTERS.md`](docs/ASSISTANT_ADAPTERS.md) for integration details.
