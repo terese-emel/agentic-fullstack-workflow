@@ -7,7 +7,7 @@ A practical, cost-aware workflow for using AI agents across full-stack developme
 - A canonical assistant-neutral context in [`AGENTS.md`](AGENTS.md)
 - Thin adapters for [Claude Code](CLAUDE.md) and [GitHub Copilot](.github/copilot-instructions.md)
 - A portable Skill Creator under [`.agents/skills/skill-creator/`](.agents/skills/skill-creator/)
-- Role prompts for planning, frontend/backend implementation, testing, lookup tasks, and review in [`.codex/agents/`](.codex/agents/)
+- Role prompts for planning, frontend/backend implementation, testing, lookup tasks, and review in [`.codex/agents/`](.codex/agents/), with Claude Code agent entries in [`.claude/agents/`](.claude/agents/)
 - Machine-readable model routing and role dependencies in [`.codex/workflow.yml`](.codex/workflow.yml)
 - A shared contract template in [`.codex/templates/contract.md`](.codex/templates/contract.md)
 - A low-cost, read-only Jira lookup skill in [`.codex/skills/jira-lookup/`](.codex/skills/jira-lookup/)

@@ -14,7 +14,8 @@ The ticket, acceptance criteria if available, the smallest relevant file tree, a
 
 - Clarify desired behavior and identify decisions that need a human.
 - Inspect only relevant code and existing conventions.
-- Create or update the shared contract before client/server work is split.
+- Fill `.codex/runs/<ticket>/contract.md` (created by `prepare-run.mjs`) before client/server work is split. Never edit `.codex/templates/contract.md`.
+- Mark `frontend_implementer` or `backend_implementer` as `skipped` in the run manifest when the contract's work split has no files for it.
 - Identify dependencies, risks, and the narrowest useful tests.
 
 ## Output

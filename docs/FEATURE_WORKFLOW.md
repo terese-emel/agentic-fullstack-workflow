@@ -12,11 +12,11 @@ Use this as a lightweight rhythm for each feature:
 
 ## Execution configuration
 
-`.codex/workflow.yml` is the source of truth for role dependencies, model routing, inputs, outputs, and call limits. A runner can use it to dispatch roles; `scripts/validate-workflow.mjs` checks that the required prompts and contract template are present.
+`.codex/workflow.yml` is the source of truth for role dependencies, per-assistant model routing, inputs, outputs, and call limits. `scripts/prepare-run.mjs` builds the run manifest from it, the Claude Code agents in `.claude/agents/` use its `claude` models, and `scripts/validate-workflow.mjs` checks that the roles, prompts, dependencies and agent files agree with it.
 
-Start a run with `node scripts/prepare-run.mjs <ticket-id>`. This creates a small run directory with a contract template and manifest before any model or MCP call is made.
+Start a run with `node scripts/prepare-run.mjs <ticket-id>`. This creates `.codex/runs/<ticket>/` with an empty `contract.md` copied from the template and a `manifest.json`, before any model or MCP call is made. Running it again keeps an existing contract and manifest. Run directories are git-ignored.
 
-The planner writes `.codex/templates/contract.md` into the feature run directory. Frontend and backend agents work from that contract. They may ask for a focused contract, schema, security, or CI file during review, but should not reopen the whole repository.
+The planner fills `.codex/runs/<ticket>/contract.md`; nobody edits the template. Frontend and backend agents work from that contract. When the work split has no files for one side, the planner marks that implementer `skipped` and the test writer waits only on the side that runs. They may ask for a focused contract, schema, security, or CI file during review, but should not reopen the whole repository.
 
 When parallel work is available, use isolated branches or worktrees:
 
@@ -34,7 +34,8 @@ Record actual usage in `.codex/runs/<ticket>/cost.json` when the host exposes it
 
 ```json
 {
-  "models": {"planner": "gpt-6.1-sol", "lookup": "gpt-5.6-luna"},
+  "assistant": "claude",
+  "models": {"planner": "sonnet", "lookup": "haiku"},
   "mcpCalls": 0,
   "inputTokens": null,
   "outputTokens": null
